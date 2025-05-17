@@ -1,0 +1,1065 @@
+basePath: /
+definitions:
+  handlers.CheckEmailResponse:
+    description: Email presence and verification status
+    properties:
+      exists:
+        example: true
+        type: boolean
+      verified:
+        example: true
+        type: boolean
+    type: object
+  handlers.DeleteResponse:
+    properties:
+      message:
+        example: User 'admin' deleted successfully
+        type: string
+    type: object
+  handlers.EmailVerificationResponse:
+    description: Returned when email is verified and account activated
+    properties:
+      message:
+        example: Email verified and Keycloak account created.
+        type: string
+      username:
+        example: johndoe
+        type: string
+      verified:
+        example: true
+        type: boolean
+    type: object
+  handlers.EngineEventPayload:
+    properties:
+      actor:
+        description: 'One of: DEV, USER, HACKER'
+        example: USER
+        type: string
+      event:
+        description: Custom event identifier
+        example: custom_event
+        type: string
+      lock:
+        description: Whether to trigger lockdown
+        example: false
+        type: boolean
+      message:
+        description: Human-readable description
+        example: Manual log injection
+        type: string
+    type: object
+  handlers.GenericMessageResponse:
+    description: Standard success message response
+    properties:
+      message:
+        example: Operation completed successfully
+        type: string
+    type: object
+  handlers.HealthCheckResponse:
+    properties:
+      service:
+        example: PeithoSecure Lite
+        type: string
+      status:
+        example: ok
+        type: string
+      version:
+        example: 1.0.0
+        type: string
+    type: object
+  handlers.HealthzResponse:
+    properties:
+      service:
+        example: PeithoSecure Lite
+        type: string
+      status:
+        example: ok
+        type: string
+      version:
+        example: 1.0.0
+        type: string
+    type: object
+  handlers.IntegrationClient:
+    properties:
+      client_id:
+        example: peitho-dashboard
+        type: string
+      enabled:
+        example: true
+        type: boolean
+      name:
+        example: Peitho Dashboard
+        type: string
+      protocol:
+        example: openid-connect
+        type: string
+      public_client:
+        example: true
+        type: boolean
+    type: object
+  handlers.LogoutRequest:
+    properties:
+      refresh_token:
+        example: eyJhbGc...
+        type: string
+    type: object
+  handlers.LogoutResponse:
+    properties:
+      message:
+        example: User logged out successfully.
+        type: string
+    type: object
+  handlers.PasswordResetConfirm:
+    properties:
+      password:
+        example: SuperSecurePassword123!
+        type: string
+      token:
+        example: abc123token
+        type: string
+    type: object
+  handlers.PasswordResetRequest:
+    properties:
+      email:
+        example: user@example.com
+        type: string
+    type: object
+  handlers.ProwlerScanResponse:
+    properties:
+      status:
+        example: completed
+        type: string
+      summary:
+        $ref: '#/definitions/prowler.ScanResult'
+    type: object
+  handlers.RefreshRequest:
+    properties:
+      refresh_token:
+        example: eyJhbGc...
+        type: string
+    type: object
+  handlers.RefreshResponse:
+    properties:
+      access_token:
+        example: eyJhbGc...
+        type: string
+      expires_in:
+        example: 300
+        type: integer
+      refresh_token:
+        example: eyJhbGc...
+        type: string
+      token_type:
+        example: Bearer
+        type: string
+    type: object
+  handlers.RegisterRequest:
+    properties:
+      email:
+        example: john@example.com
+        type: string
+      username:
+        example: johndoe
+        type: string
+    type: object
+  handlers.RegisterResponse:
+    properties:
+      message:
+        example: user registered successfully, please verify email
+        type: string
+    type: object
+  handlers.SetupPasswordRequest:
+    properties:
+      password:
+        example: StrongPassword123!
+        type: string
+      token:
+        example: verify-token-abc123
+        type: string
+    type: object
+  handlers.StatusResponse:
+    properties:
+      brand:
+        example: PeithoSecure Lite
+        type: string
+      copyright:
+        example: © 2025 Peitho
+        type: string
+      license_status:
+        example: Valid
+        type: string
+      mood:
+        example: Stable
+        type: string
+    type: object
+  handlers.TokenMetricsResponse:
+    properties:
+      active:
+        example: 103
+        type: integer
+      issued:
+        example: 142
+        type: integer
+      refreshed:
+        example: 87
+        type: integer
+      revoked:
+        example: 12
+        type: integer
+    type: object
+  handlers.TraceEventView:
+    properties:
+      actor:
+        example: USER
+        type: string
+      event:
+        example: auth_failed
+        type: string
+      id:
+        example: 7c8bfc1d
+        type: string
+      lock:
+        example: false
+        type: boolean
+      message:
+        example: unauthorized access detected
+        type: string
+      severity:
+        example: low
+        type: string
+      timestamp:
+        example: "2025-05-16T09:12:00Z"
+        type: string
+    type: object
+  handlers.UnlockStatusResponse:
+    properties:
+      branding_locked:
+        example: true
+        type: boolean
+      expires_at:
+        example: "2025-08-14T02:50:19Z"
+        type: string
+      secured_by:
+        example: "Peitho \U0001F510"
+        type: string
+      server_time:
+        example: "2025-05-16T09:30:00Z"
+        type: string
+      trace_engine_active:
+        example: true
+        type: boolean
+      unlocked:
+        example: true
+        type: boolean
+      unlocked_at:
+        example: "2025-05-16T02:50:19Z"
+        type: string
+    type: object
+  handlers.UnlockSuccessResponse:
+    description: Response for successful license unlock
+    properties:
+      message:
+        example: unlocked
+        type: string
+    type: object
+  models.LoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  models.LoginResponse:
+    properties:
+      access_token:
+        type: string
+      email_verified:
+        description: <-- Added email verification info
+        type: boolean
+      expires_in:
+        type: integer
+      refresh_token:
+        type: string
+      token_type:
+        type: string
+    type: object
+  observer.Actor:
+    enum:
+    - DEV
+    - USER
+    - HACKER
+    type: string
+    x-enum-varnames:
+    - DEV
+    - USER
+    - HACKER
+  observer.ThreatLevel:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    type: integer
+    x-enum-comments:
+      LEVEL_LOCKDOWN: 4 - System-level tampering, triggers lockdown
+      LEVEL_MEAN: 3 - Mid-tier severity, often for hacks
+      LEVEL_MOCK: 2 - Snarky, non-critical
+      LEVEL_NONE: "0"
+      LEVEL_SOFT: 1 - Minor mistake, gentle pushback
+    x-enum-varnames:
+    - LEVEL_NONE
+    - LEVEL_SOFT
+    - LEVEL_MOCK
+    - LEVEL_MEAN
+    - LEVEL_LOCKDOWN
+  observer.TracePayload:
+    properties:
+      actor:
+        allOf:
+        - $ref: '#/definitions/observer.Actor'
+        description: Who triggered it
+        example: HACKER
+      event:
+        description: Event type
+        example: tamper
+        type: string
+      id:
+        description: Unique trace ID
+        example: abc123
+        type: string
+      lock:
+        description: Lockdown trigger flag
+        example: false
+        type: boolean
+      message:
+        description: Event message
+        example: unauthorized access detected
+        type: string
+      severity:
+        allOf:
+        - $ref: '#/definitions/observer.ThreatLevel'
+        description: ThreatLevel (as int for frontend)
+        example: 3
+      timestamp:
+        description: UTC time
+        example: "2025-05-16T12:30:00Z"
+        type: string
+    type: object
+  prowler.ScanResult:
+    properties:
+      db_exists:
+        type: boolean
+      docker_detected:
+        type: boolean
+      license_token_present:
+        type: boolean
+      smtp_configured:
+        type: boolean
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Secure backend API built with Go, Keycloak, and SQLite.
+  title: PeithoSecure Lite API
+  version: "1.0"
+paths:
+  /api/v1/admin-metrics:
+    get:
+      description: Returns full Prometheus metrics (Basic Auth protected)
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: Prometheus-formatted metrics
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      summary: Admin-only Prometheus metrics
+      tags:
+      - metrics
+  /api/v1/auth/check:
+    get:
+      description: Determines if the email exists in the system and whether it has
+        been verified
+      parameters:
+      - description: Email address to check
+        in: query
+        name: email
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.CheckEmailResponse'
+        "400":
+          description: Invalid email
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      summary: Check if email exists and is verified
+      tags:
+      - Auth
+  /api/v1/auth/delete:
+    delete:
+      consumes:
+      - application/json
+      description: Deletes the specified user from Keycloak and logs the action in
+        the audit trail.
+      parameters:
+      - description: Username to delete
+        in: query
+        name: username
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Account deleted successfully
+          schema:
+            $ref: '#/definitions/handlers.DeleteResponse'
+        "400":
+          description: Username missing or invalid
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "500":
+          description: Failed to delete from Keycloak or log audit
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      summary: Delete a user account (admin only)
+      tags:
+      - Admin
+  /api/v1/auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Logs in the user and returns a Keycloak-issued JWT token pair along
+        with email verification status
+      parameters:
+      - description: Username and password payload
+        in: body
+        name: loginRequest
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Authentication successful
+          schema:
+            $ref: '#/definitions/models.LoginResponse'
+        "400":
+          description: Malformed request or JSON parsing failed
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "401":
+          description: Invalid credentials
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "429":
+          description: Too many failed login attempts
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      summary: Authenticate user credentials
+      tags:
+      - auth
+  /api/v1/auth/logout:
+    post:
+      consumes:
+      - application/json
+      description: Invalidates the user's refresh token and clears session state
+      parameters:
+      - description: Refresh token payload
+        in: body
+        name: logoutRequest
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.LogoutRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.LogoutResponse'
+        "400":
+          description: Malformed request or missing token
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "401":
+          description: Invalid or expired token
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      summary: Logout current user
+      tags:
+      - auth
+  /api/v1/auth/refresh:
+    post:
+      consumes:
+      - application/json
+      description: Uses a valid refresh token to issue a new access token
+      parameters:
+      - description: Refresh token payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.RefreshRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.RefreshResponse'
+        "400":
+          description: Malformed request or missing refresh token
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "401":
+          description: Invalid or expired refresh token
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      summary: Refresh access token
+      tags:
+      - auth
+  /api/v1/auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Creates a local user, sends verification email, and defers password/keycloak
+        setup
+      parameters:
+      - description: Email and username payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/handlers.RegisterResponse'
+        "400":
+          description: Malformed request or missing fields
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "409":
+          description: Email already registered and verified
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "500":
+          description: Database or email error
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      summary: Register a new user (deferred setup)
+      tags:
+      - auth
+  /api/v1/auth/request-password-reset:
+    post:
+      consumes:
+      - application/json
+      description: Sends a password reset email to the user with a one-time token
+      parameters:
+      - description: Email to receive reset link
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.PasswordResetRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.GenericMessageResponse'
+        "400":
+          description: Missing or invalid email
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "500":
+          description: Internal error or email send failed
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      summary: Request password reset link
+      tags:
+      - auth
+  /api/v1/auth/resend-token:
+    get:
+      description: Sends a new verification email if the account exists and is not
+        verified
+      parameters:
+      - description: User's registered email
+        in: query
+        name: email
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Missing or already verified
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "404":
+          description: User not found
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "500":
+          description: Email sending or DB error
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      summary: Resend email verification link
+      tags:
+      - auth
+  /api/v1/auth/reset-password:
+    post:
+      consumes:
+      - application/json
+      description: Accepts a one-time token and new password, and resets the account
+        password
+      parameters:
+      - description: Token and new password
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.PasswordResetConfirm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.GenericMessageResponse'
+        "400":
+          description: Invalid or missing token/password
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "500":
+          description: Internal error or reset failure
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      summary: Reset password using token
+      tags:
+      - auth
+  /api/v1/auth/secure-sample:
+    get:
+      description: Returns a success message for authenticated users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      security:
+      - BearerAuth: []
+      summary: Sample protected route
+      tags:
+      - Auth
+  /api/v1/auth/send-verification:
+    post:
+      consumes:
+      - application/json
+      description: Sends a new verification email to the user
+      parameters:
+      - description: Email payload
+        in: body
+        name: emailRequest
+        required: true
+        schema:
+          additionalProperties:
+            type: string
+          type: object
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: Verification email sent
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "404":
+          description: User not found
+          schema:
+            type: string
+      summary: Resend verification email
+      tags:
+      - Email
+  /api/v1/auth/setup-password:
+    post:
+      consumes:
+      - application/json
+      description: Sets initial password after email verification, creates Keycloak
+        user, and writes PQC license
+      parameters:
+      - description: Token and new password
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.SetupPasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.GenericMessageResponse'
+        "400":
+          description: Missing or invalid input
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "404":
+          description: User not found
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "409":
+          description: Already verified or setup attempted twice
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "500":
+          description: Server, Keycloak, or license error
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      summary: Finalize user account setup
+      tags:
+      - auth
+  /api/v1/auth/unlock-status:
+    get:
+      description: Returns license unlock state, branding status, and server clock
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.UnlockStatusResponse'
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: License Unlock Status
+      tags:
+      - License
+  /api/v1/auth/unlock/validate:
+    post:
+      consumes:
+      - application/json
+      description: Accepts a signed PQC license block, writes it to disk, and validates
+        it
+      parameters:
+      - description: License block payload
+        in: body
+        name: unlockRequest
+        required: true
+        schema:
+          additionalProperties:
+            type: string
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Unlock succeeded
+          schema:
+            $ref: '#/definitions/handlers.UnlockSuccessResponse'
+        "400":
+          description: Invalid request
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "403":
+          description: Unlock validation failed
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "500":
+          description: Write failed
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      summary: Validate unlock license
+      tags:
+      - license
+  /api/v1/auth/verify-email:
+    get:
+      description: Verifies email via token, marks user as verified, registers in
+        Keycloak, and issues PQC license
+      parameters:
+      - description: Verification token
+        in: query
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.EmailVerificationResponse'
+        "400":
+          description: Invalid token
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "409":
+          description: Already verified
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      summary: Verify user email
+      tags:
+      - Email
+  /api/v1/deeplink:
+    get:
+      description: Redirects users to the appropriate app or web route based on platform
+        and deep link type (verify/reset).
+      parameters:
+      - description: Link type (verify or reset)
+        in: query
+        name: type
+        required: true
+        type: string
+      - description: Verification or reset token
+        in: query
+        name: token
+        required: true
+        type: string
+      produces:
+      - text/html
+      responses:
+        "302":
+          description: Redirect to app or browser path
+          schema:
+            type: string
+        "400":
+          description: Missing or invalid query parameters
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      summary: Universal deep link handler
+      tags:
+      - DeepLink
+  /api/v1/deeplink/legacy:
+    get:
+      description: Redirects to PeithoSecure app using deep link for verify/reset
+        tokens (legacy path)
+      parameters:
+      - description: Link type (verify/reset)
+        in: query
+        name: type
+        required: true
+        type: string
+      - description: Verification or reset token
+        in: query
+        name: token
+        required: true
+        type: string
+      produces:
+      - text/plain
+      responses:
+        "302":
+          description: Redirect to app URI
+          schema:
+            type: string
+        "400":
+          description: Missing or invalid query parameters
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      summary: Legacy deep link redirect
+      tags:
+      - DeepLink
+  /api/v1/events/log:
+    post:
+      consumes:
+      - application/json
+      description: Log a custom trace event (devtools, external agent, honeypot, etc.)
+      parameters:
+      - description: Custom trace event to log
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.EngineEventPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Event logged successfully
+          schema:
+            $ref: '#/definitions/handlers.GenericMessageResponse'
+        "400":
+          description: Invalid request body
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+        "422":
+          description: Unknown actor type
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      summary: Submit system trace event
+      tags:
+      - System
+  /api/v1/integrations:
+    get:
+      description: Returns a list of enabled Keycloak clients integrated with the
+        platform
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/handlers.IntegrationClient'
+            type: array
+        "401":
+          description: Unauthorized or token expired
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      summary: List active app integrations
+      tags:
+      - Integrations
+  /api/v1/log/trace:
+    get:
+      description: Returns recent trace events stored in memory (for debugging, audits,
+        or escalations)
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/handlers.TraceEventView'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: View in-memory trace logs
+      tags:
+      - logs
+  /api/v1/metrics:
+    get:
+      description: Returns raw Prometheus metrics for external monitoring
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: Prometheus-formatted metrics
+          schema:
+            type: string
+      summary: Prometheus metrics endpoint
+      tags:
+      - metrics
+  /api/v1/metrics/tokens:
+    get:
+      description: Returns current issued, refreshed, revoked, and active token counts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.TokenMetricsResponse'
+      summary: Token metrics (usage stats)
+      tags:
+      - metrics
+  /api/v1/security-scan:
+    get:
+      description: Runs a limited Peitho Prowler scan to check for signs of tampering,
+        token leakage, or license gaps
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ProwlerScanResponse'
+        "403":
+          description: License lock or tamper guard triggered
+          schema:
+            $ref: '#/definitions/observer.TracePayload'
+      summary: Trigger Prowler security audit
+      tags:
+      - security
+  /health:
+    get:
+      description: Returns the operational status of the PeithoSecure Lite backend
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Service is running
+          schema:
+            $ref: '#/definitions/handlers.HealthCheckResponse'
+      summary: Service health check
+      tags:
+      - Health
+  /healthz:
+    get:
+      description: Lightweight endpoint for readiness/liveness probes (Kubernetes,
+        CI/CD, etc.)
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.HealthzResponse'
+      summary: Infra health probe
+      tags:
+      - Health
+  /status:
+    get:
+      description: Returns branding, license status, copyright, and system mood
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.StatusResponse'
+      summary: Service status and branding info
+      tags:
+      - health
+securityDefinitions:
+  BasicAuth:
+    type: basic
+swagger: "2.0"

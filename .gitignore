@@ -1,0 +1,31 @@
+# 🔒 PeithoSecure Lite – Lock it down
+
+# PQC Core (DO NOT COMMIT)
+peitho-core/
+peitho-core/
+peitho-core/
+
+# 🔑 Private keys, licenses, secrets
+peitho-core/keys/
+peitho-core/unlock.lic
+*.key
+*.sig
+
+# 🧪 Env + Local configs
+.env
+.env.local
+.env.*
+
+# 🏗️ Build artifacts
+peitho-server
+*.log
+peitho-trace.log
+
+# 📝 IDE/editor clutter
+.idea/
+.vscode/
+.DS_Store
+
+# 🚫 Misc
+*.bak
+*.tmp

@@ -1,0 +1,27 @@
+{
+  "realm": "peitho",
+  "enabled": true,
+  "users": [
+    {
+      "username": "admin",
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin"
+        }
+      ]
+    }
+  ],
+  "clients": [
+    {
+      "clientId": "peitho-client",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "secret": "WXBvDnJLYV29gElRClC1OaiWSSXt1ueZ",
+      "directAccessGrantsEnabled": true,
+      "redirectUris": ["*"]
+    }
+  ]
+}

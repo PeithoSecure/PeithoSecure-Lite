@@ -1,0 +1,18 @@
+
+# ⚙️ Git + IDE noise
+.git/
+.gitignore
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# 🔍 Local builds & binaries
+peitho-server
+*.out
+*.exe
+
+# 🗃️ Misc
+*.log
+.env
+.DS_Store
