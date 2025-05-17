@@ -100,7 +100,7 @@ If it fails — that means it’s working.
 It’s doing exactly what I designed it to do.
 
 > Clone it. Fork it. Copy it.  
-> If it runs, let me know — so I can lock it harder.  
+> If it runs, [let me know](mailto:peithoindia.co@gmail.com) — so I can lock it harder.
 > If it doesn’t, don’t worry — the Roast Engine™ is working as intended.
 
 ---
