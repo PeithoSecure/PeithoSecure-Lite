@@ -33,3 +33,6 @@ Contact:
 📧 **peithoindia.co@gmail.com**
 
 I’m always happy to hear from the community!
+
+📖 [Setup Guide](docs/setup.md) — Want to run it? Read this first.
+
